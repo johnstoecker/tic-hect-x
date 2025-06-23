@@ -1,13 +1,13 @@
 'use client'
 import React, { useState } from 'react';
-//import './App.css';
+import './globals.css';
 
 const BOARD_SIZE = 3;
 const CELL_COUNT = BOARD_SIZE * BOARD_SIZE;
 type Player = 'X' | 'O' | null;
 const initialBoard: Player[] = Array(CELL_COUNT).fill(null);
 
-export default function Home() {
+export default function Page() {
   const [board, setBoard] = useState<Player[]>(initialBoard);
   const [isXPlaying, setIsXPlaying] = useState(true);
   const [rotation, setRotation] = useState(0);
@@ -16,7 +16,7 @@ export default function Home() {
   const [hasAttacked, setHasAttacked] = useState<boolean>(false);
 
   const currentPlayer: Player = isXPlaying ? 'X' : 'O';
-  const winner: Player = calculateWinner(board);
+  const winner = calculateWinner(board);
 
   // handle click on the board
   const handleClick = (index: number) => {
@@ -147,7 +147,7 @@ export default function Home() {
   );
 }
 
-export function calculateWinner(squares: Player[]): Player {
+function calculateWinner(squares: Player[]) {
   const size = 3;
   const visited = new Set<number>();
 
@@ -188,7 +188,7 @@ export function calculateWinner(squares: Player[]): Player {
   for (let r = 0; r < size; r++) {
     for (let c = 0; c < size; c++) {
       const idx = r * size + c;
-      const player = squares[idx];
+      const player: Player = squares[idx];
       if (player && !visited.has(idx)) {
         if (dfs(r, c, player) >= 4) return player;
       }

@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Ideas (from Kit)
+On rotate, sometimes a piece drops by gravity
+There is a sandworm and X's and O's have to work together
+
 ## Getting Started
 
 First, run the development server:

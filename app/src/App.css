@@ -38,3 +38,12 @@ body {
 .cell.highlight {
   background-color: lightgreen;
 }
+
+.instructions {
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.instruction {
+  text-align: left;;
+}

@@ -1,13 +1,14 @@
-'use client'
 import React, { useState } from 'react';
-import './globals.css';
+// import logo from './logo.svg';
+import './App.css';
+// import './globals.css';
 
 const BOARD_SIZE = 3;
 const CELL_COUNT = BOARD_SIZE * BOARD_SIZE;
 type Player = 'X' | 'O' | null;
 const initialBoard: Player[] = Array(CELL_COUNT).fill(null);
 
-export default function Page() {
+function App() {
   const [board, setBoard] = useState<Player[]>(initialBoard);
   const [isXPlaying, setIsXPlaying] = useState(true);
   const [rotation, setRotation] = useState(0);
@@ -112,12 +113,19 @@ export default function Page() {
       <h1>Tic-Hect-4</h1>
       <h3>By Leonardo</h3>
       <h2>Turn: {currentPlayer}</h2>
+      <p className="instructions">
+        <div className="instruction">{hasPlaced ? '1. ✅ Place your token on the board' : '1. Place your token on the board'}</div>
+        <div className="instruction">{'2. Rotate the board at any time'}</div>
+        <div className="instruction">{hasAttacked ? '3. ✅ Attack enemy token(s) below your tokens' : '3. (Optional) Attack enemy token(s) below your tokens'}</div>
+        <div className="instruction">{'4. (Optional) Click on destroyed token spaces to take them over'}</div>
+        <div className="instruction">{'5. End your turn to allow the other player to play'}</div>
+      </p>
       <div className="controls">
         <button onClick={rotateBoard}>Rotate Board</button>
-        <button onClick={attack} disabled={!!winner || hasAttacked}>
+        <button onClick={attack} disabled={!!winner || hasAttacked || !hasPlaced}>
           Attack
         </button>
-        <button onClick={endTurn} disabled={!!winner}>
+        <button onClick={endTurn} disabled={!!winner || !hasPlaced}>
           End Turn
         </button>
         <button onClick={resetGame}>Reset Game</button>
@@ -146,6 +154,11 @@ export default function Page() {
     </div>
   );
 }
+
+export default App;
+
+
+
 
 function calculateWinner(squares: Player[]) {
   const size = 3;
@@ -197,5 +210,3 @@ function calculateWinner(squares: Player[]) {
 
   return null;
 }
-
-
